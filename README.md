@@ -1,5 +1,5 @@
 # powershell-ce
-Powershell script using **docker-machine** to create a **Docker CE** swarm cluster with **UCP** and **DTR** on **Hyper-V** VM's.
+Powershell script using **docker-machine** to create a **Docker CE** swarm cluster with **UCP** on **Hyper-V** VM's.
 
 1. Using **Powershell**, execute the following command in the root folder containing the script:
 
