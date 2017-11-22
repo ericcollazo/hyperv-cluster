@@ -4,7 +4,6 @@ $manager0ip = docker-machine ip manager-0
 
 # Initiate swarm
 docker-machine ssh manager-0 docker swarm init --advertise-addr $manager0ip
-docker node update --availability drain manager-0
 
 # Get join tokens
 $workerJoinToken = docker-machine ssh manager-0 docker swarm join-token worker -q
@@ -16,6 +15,7 @@ $ucpPort = "2378"
 
 # Install UCP
 docker-machine ssh manager-0 docker container run --rm -it --name ucp -v /var/run/docker.sock:/var/run/docker.sock docker/ucp:2.2.4 install --host-address $manager0ip --admin-username $ucpUsr --admin-password $ucpPwd --swarm-port $ucpPort
+docker node update --availability drain manager-0
 
 # worker-0
 docker-machine create --driver hyperv --hyperv-memory 2048 --hyperv-disk-size 5000 --hyperv-virtual-switch "Default Switch" worker-0
