@@ -35,16 +35,6 @@ docker-machine ssh worker-1 docker swarm join --token $workerJoinToken $joinIp
 docker-machine create --driver hyperv --hyperv-memory 2048 --hyperv-disk-size 5000 --hyperv-virtual-switch "Default Switch" worker-2
 docker-machine ssh worker-2 docker swarm join --token $workerJoinToken $joinIp
 
-# Install DTR
-docker-machine ssh worker-0 docker pull docker/dtr:2.4.1
-docker-machine ssh worker-0 docker run -it --rm docker/dtr:2.4.1 install --ucp-node worker-0 --ucp-url https://$manager0ip --ucp-username admin --ucp-password adminadmin --ucp-insecure-tls
-
-docker-machine ssh worker-1 docker pull docker/dtr:2.4.1
-docker-machine ssh worker-1 docker run -it --rm docker/dtr:2.4.1 join --ucp-node worker-0 --ucp-insecure-tls
-
-docker-machine ssh worker-2 docker pull docker/dtr:2.4.1
-docker-machine ssh worker-2 docker run -it --rm docker/dtr:2.4.1 join --ucp-node worker-0 --ucp-insecure-tls
-
 # List nodes in swarm
 docker-machine ssh manager-0 docker node ls
 
