@@ -1,3 +1,7 @@
+# Run script with Administrator rights
+if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) { Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs; exit }
+
+
 # manager-0
 docker-machine create --driver hyperv --hyperv-memory 2048 --hyperv-disk-size 5000 --hyperv-virtual-switch "Default Switch" manager-0
 $manager0ip = docker-machine ip manager-0
